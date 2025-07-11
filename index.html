@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Joga w Studio Dźwięku Jogi</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #333;
+    }
+
+    .navbar {
+  background-color: #1a1a40; /* ciemny fiolet granat */
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left a {
+  color: white;
+  text-decoration: none;
+  margin-right: 25px;
+  font-weight: 600;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.nav-left a:hover {
+  color: #5ca08e; /* zielony przy hover */
+}
+
+.nav-right .btn-green {
+  background-color: #3bb54a; /* zielony przycisk */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.nav-right .btn-green:hover {
+  background-color: #2d8b3a; /* ciemniejszy zielony po hover */
+}
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      background: #e6f2ef;
+      padding: 40px 20px;
+    }
+    header img {
+      border-radius: 50%;
+      max-width: 250px;
+      margin: 20px;
+      border: 5px solid #5ca08e;
+    }
+    header .desc {
+      max-width: 500px;
+      margin: 20px;
+    }
+    header h1 {
+      margin-bottom: 10px;
+      color: #5ca08e;
+    }
+    .calendar-container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .calendar-header button {
+      background: #5ca08e;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .day, .day-name {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .day {
+      cursor: pointer;
+    }
+    .day:hover {
+      background: #5ca08e;
+      color: white;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background: white;
+      margin: 10% auto;
+      padding: 20px;
+      max-width: 500px;
+      border-radius: 5px;
+    }
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #5ca08e;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      background: #f0f0f0;
+      padding: 10px;
+    }
+    .gallery img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(3);
+    }
+
+    .classes {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.class-block {
+  margin-bottom: 30px;
+}
+
+.class-block h2 {
+  font-size: 22px;
+  color: #5ca08e; /* zielony jogowy */
+  margin-bottom: 10px;
+  border-bottom: 2px solid #5ca08e;
+  padding-bottom: 5px;
+}
+
+.class-block p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-left">
+            <a href="#">Główna</a>
+            <a href="#">Zajęcia</a>
+            <a href="#">O mnie</a>
+            <a href="#">Kontakt</a>
+            <a href="#">Zapisz się</a>
+          </div>
+          <div class="nav-right">
+            <a href="#" class="btn-green">Kontakty</a>
+          </div>
+        </div>
+      </nav>
+
+<header>
+  <div class="desc">
+    <h1>Joga w Studio Dźwięku Jogi</h1>
+    <p>Nazywam się Paweł Matusiak i od ponad 7 lat prowadzę zajęcia jogi, wspierając uczestników w budowaniu równowagi między ciałem a umysłem. </p>
+    <p>Zajęcia odbywają się regularnie w godzinach porannych oraz wieczornych. W sezonie letnim, jeśli pozwala na to pogoda, spotykamy się na świeżym powietrzu – w urokliwych lokalizacjach takich jak Zakrzówek, Park Jordana czy Park Bednarskiego. </p> 
+    <p>W okresie zimowym lub przy niesprzyjającej pogodzie, praktyka przenosi się do przestronnej sali. </p> 
+    <p>Każda sesja trwa 60 minut, a na zakończenie poświęcam dodatkowe 10 minut na relaksację w pozycji Savasana, aby w pełni zintegrować efekty praktyki.</p>
+  </div>
+  <img src="images/photo_5442801171782825999_y.jpg" alt="Paweł Matusiak">
+</header>
+
+<section class="classes">
+    <div class="class-block">
+      <h2>Poranna joga – Power Vinyasa | godz. 9:00</h2>
+      <p>Poczuj przypływ siły, energii i motywacji na cały dzień! Dynamiczna sesja Power Vinyasa pobudzi ciało i umysł – idealna na dobry początek poranka.</p>
+    </div>
+  
+    <div class="class-block">
+      <h2>Wieczorna joga – Vinyasa Flow | godz. 18:00</h2>
+      <p>Zwolnij tempo po intensywnym dniu. Wieczorna praktyka Vinyasy to płynny ruch, oddech i regeneracja. Oczyść głowę, rozluźnij ciało i znajdź spokój.</p>
+    </div>
+  
+    <div class="class-block">
+      <h2>Jak wyglądają zajęcia z jogi</h2>
+      <p>Każde zajęcia jogi zaczynają się krótką medytacją i świadomym oddechem, aby wyciszyć umysł i przygotować ciało do praktyki.</p>
+      <p>Następnie przechodzimy przez serię asan dostosowanych do poziomu uczestników, dbając o bezpieczeństwo i poprawną technikę.</p>
+      <p>Zajęcia kończą się relaksacją w pozycji Savasana, aby zintegrować efekty praktyki i wprowadzić głęboki spokój oraz odprężenie.</p>
+    </div>
+  </section>
+
+        <div class="gallery">
+          <img src="images/1.jpg" loading="lazy" alt="Zajęcia jogi" >
+          <img src="images/2.jpg" loading="lazy" alt="Zajęcia jogi" >
+          <img src="images/3.jpg" loading="lazy" alt="Zajęcia jogi" >
+          <img src="images/4.jpg" loading="lazy" alt="Zajęcia jogi" >
+          <img src="images/5.jpg" loading="lazy" alt="Zajęcia jogi" >
+          <img src="images/6.jpg" loading="lazy" alt="Zajęcia jogi" >
+        </div>
+      </section>
+
+      <section class="classes">
+        <div class="class-block">
+          <h2>Zapisz się</h2>
+          <p>Aby się zapisać, wybierz dzień, który Ci najbardziej pasuje, kliknij na niego i wypełnij formularz zgłoszeniowy.</p>
+        </div>
+      </section>
+
+<div class="calendar-container">
+  <div class="calendar-header">
+    <button onclick="prevMonth()">«</button>
+    <div id="monthYear"></div>
+    <button onclick="nextMonth()">»</button>
+  </div>
+  <div class="days" id="dayNames"></div>
+  <div class="days" id="calendarDays"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Zapisz się na zajęcia</h2>
+    <iframe src="https://forms.gle/q2Z8QQva8WzgbqEM7" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Ładowanie…</iframe>
+  </div>
+</div>
+
+<script>
+  const dayNames = ['Pn','Wt','Śr','Cz','Pt','So','Nd'];
+  const dayNamesContainer = document.getElementById('dayNames');
+  dayNames.forEach(d => {
+    const div = document.createElement('div');
+    div.classList.add('day-name');
+    div.innerText = d;
+    dayNamesContainer.appendChild(div);
+  });
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+
+  const monthYear = document.getElementById('monthYear');
+  const calendarDays = document.getElementById('calendarDays');
+
+  function renderCalendar(month, year) {
+    calendarDays.innerHTML = '';
+    monthYear.innerText = `${year} – ${month+1}`;
+
+    let firstDay = new Date(year, month, 1).getDay();
+    if(firstDay === 0) firstDay = 7; // niedziela na koniec
+
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+
+    for(let i=1; i<firstDay; i++){
+      const empty = document.createElement('div');
+      calendarDays.appendChild(empty);
+    }
+
+    for(let i=1; i<=daysInMonth; i++){
+      const day = document.createElement('div');
+      day.classList.add('day');
+      day.innerText = i;
+      day.onclick = () => openModal(i, month+1, year);
+      calendarDays.appendChild(day);
+    }
+  }
+
+  function prevMonth() {
+    currentMonth--;
+    if(currentMonth < 0){
+      currentMonth = 11;
+      currentYear--;
+    }
+    if(currentYear < 2025) currentYear = 2025;
+    renderCalendar(currentMonth, currentYear);
+  }
+
+  function nextMonth() {
+    currentMonth++;
+    if(currentMonth > 11){
+      currentMonth = 0;
+      currentYear++;
+    }
+    if(currentYear > 2045) currentYear = 2045;
+    renderCalendar(currentMonth, currentYear);
+  }
+
+  renderCalendar(currentMonth, currentYear);
+
+  function openModal(day, month, year) {
+    document.getElementById('modal').style.display = 'block';
+  }
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
